@@ -8,42 +8,10 @@ datasource db {
 }
 
 model User {
-  id             Int      @id @default(autoincrement())
-  username       String?  @unique
-  password       String?
-  age            Int?
-  email          String   @unique
-  emailVerified  DateTime?
-  image          String?
-
-  accounts       Account[]
-  sessions       Session[]
-}
-
-model Account {
-  id                 Int       @id @default(autoincrement())
-  userId             Int
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String? 
-  access_token       String? 
-  expires_at         Int? 
-  token_type         String? 
-  scope              String? 
-  id_token           String? 
-  session_state      String? 
-
-  user User @relation(fields: [userId], references: [id])
-
-  @@unique([provider, providerAccountId])
-}
-
-model Session {
-  id           Int      @id @default(autoincrement())
-  sessionToken String   @unique
-  userId       Int
-  expires      DateTime
-
-  user User @relation(fields: [userId], references: [id])
+  id          Int      @id @default(autoincrement())
+  username    String   @unique
+  email       String   @unique
+  password    String
+  firstname   String?
+  lastname    String?
 }
