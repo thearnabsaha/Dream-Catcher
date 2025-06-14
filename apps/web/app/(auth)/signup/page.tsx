@@ -14,8 +14,10 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import Link from "next/link"
 import { SignUpSchema } from "@workspace/common/types"
+import { FaGithub, FaGoogle } from "react-icons/fa"
+import { signIn } from "next-auth/react"
 const Signup = () => {
-  const form = useForm<z.infer<typeof SignUpSchema>>({
+  const Signupform = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
     defaultValues: {
       username: "",
@@ -28,16 +30,17 @@ const Signup = () => {
 
   function onSubmit(values: z.infer<typeof SignUpSchema>) {
     console.log(values)
+    Signupform.reset()
   }
   return (
     <div className="flex flex-col justify-center h-full p-10">
       <h1 className="text-4xl font-semibold">Create an account</h1>
       <p className="text-ring mt-1 mb-5 text-sm">User registration page to create account with email and password.</p>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <Form {...Signupform}>
+        <form onSubmit={Signupform.handleSubmit(onSubmit)} className="space-y-4">
           <div className="flex">
             <FormField
-              control={form.control}
+              control={Signupform.control}
               name="firstname"
               render={({ field }) => (
                 <FormItem className="w-full">
@@ -49,7 +52,7 @@ const Signup = () => {
               )}
             />
             <FormField
-              control={form.control}
+              control={Signupform.control}
               name="lastname"
               render={({ field }) => (
                 <FormItem className="w-full ml-2">
@@ -62,7 +65,7 @@ const Signup = () => {
             />
           </div>
           <FormField
-            control={form.control}
+            control={Signupform.control}
             name="username"
             render={({ field }) => (
               <FormItem>
@@ -74,7 +77,7 @@ const Signup = () => {
             )}
           />
           <FormField
-            control={form.control}
+            control={Signupform.control}
             name="email"
             render={({ field }) => (
               <FormItem>
@@ -86,7 +89,7 @@ const Signup = () => {
             )}
           />
           <FormField
-            control={form.control}
+            control={Signupform.control}
             name="password"
             render={({ field }) => (
               <FormItem>
@@ -102,7 +105,10 @@ const Signup = () => {
         </form>
       </Form>
       <h1 className="flex justify-center items-center mt-2 text-muted-foreground"><span className="w-30 h-0.5 bg-muted-foreground block mr-2"></span>Or Register With <span className="w-30 h-0.5 bg-muted-foreground block ml-2"></span></h1>
-      
+      <div>
+        <Button onClick={() => signIn("google")} className="m-3 p-5" variant="outline"><FaGoogle />Sign in with Google</Button>
+        <Button onClick={() => signIn("github")} className="m-3 p-5" variant="outline"><FaGithub />Sign in with Github</Button>
+      </div>
     </div>
   )
 }

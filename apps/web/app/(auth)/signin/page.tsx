@@ -13,6 +13,8 @@ import { Input } from "@workspace/ui/components/input"
 import { Button } from "@workspace/ui/components/button"
 import { SignInSchema } from "@workspace/common/types"
 import Link from "next/link"
+import { signIn } from "next-auth/react"
+import { FaGithub, FaGoogle } from "react-icons/fa"
 const page = () => {
   const SignInform = useForm<z.infer<typeof SignInSchema>>({
     resolver: zodResolver(SignInSchema),
@@ -23,6 +25,7 @@ const page = () => {
   })
   function onSubmit(values: z.infer<typeof SignInSchema>) {
     console.log(values)
+    SignInform.reset()
   }
   return (
     <div className="flex flex-col justify-center h-full p-10">
@@ -58,6 +61,11 @@ const page = () => {
           <Button type="submit" className="w-full">Submit</Button>
         </form>
       </Form>
+      <h1 className="flex justify-center items-center mt-2 text-muted-foreground"><span className="w-30 h-0.5 bg-muted-foreground block mr-2"></span>Or Register With <span className="w-30 h-0.5 bg-muted-foreground block ml-2"></span></h1>
+      <div>
+        <Button onClick={() => signIn("google")} className="m-3 p-5" variant="outline"><FaGoogle />Sign in with Google</Button>
+        <Button onClick={() => signIn("github")} className="m-3 p-5" variant="outline"><FaGithub />Sign in with Github</Button>
+      </div>
     </div>
   )
 }
