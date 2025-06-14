@@ -14,8 +14,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import Link from "next/link"
 import { SignUpSchema } from "@workspace/common/types"
-import { FaGithub, FaGoogle } from "react-icons/fa"
-import { signIn } from "next-auth/react"
 const Signup = () => {
   const Signupform = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
@@ -104,11 +102,7 @@ const Signup = () => {
           <Button type="submit" className="w-full">Submit</Button>
         </form>
       </Form>
-      <h1 className="flex justify-center items-center mt-2 text-muted-foreground"><span className="w-30 h-0.5 bg-muted-foreground block mr-2"></span>Or Register With <span className="w-30 h-0.5 bg-muted-foreground block ml-2"></span></h1>
-      <div>
-        <Button onClick={() => signIn("google")} className="m-3 p-5" variant="outline"><FaGoogle />Sign in with Google</Button>
-        <Button onClick={() => signIn("github")} className="m-3 p-5" variant="outline"><FaGithub />Sign in with Github</Button>
-      </div>
+      {/* <h1 className="flex justify-center items-center mt-2 text-muted-foreground"><span className="w-30 h-0.5 bg-muted-foreground block mr-2"></span>Or Register With <span className="w-30 h-0.5 bg-muted-foreground block ml-2"></span></h1> */}
     </div>
   )
 }

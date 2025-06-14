@@ -2,7 +2,6 @@ import { Geist, Geist_Mono } from "next/font/google"
 
 import "@workspace/ui/globals.css"
 import { Providers } from "@/components/providers"
-import { LoginButton } from "@/components/LoginButton"
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -26,7 +25,6 @@ export default function RootLayout({
       >
         
         <Providers>
-          <LoginButton/>
           {children}
         </Providers>
       </body>
