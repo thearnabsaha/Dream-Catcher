@@ -2,9 +2,13 @@
 "use client"
 import { signOut, useSession } from "next-auth/react";
 import { Button } from "@workspace/ui/components/button";
+import { useRouter } from "next/navigation";
 export default function DashboardPage() {
     const { data: session } = useSession();
+    const router=useRouter()
+    
     if (!session) {
+        // router.push("/signup")
         return (
             <div className="text-center mt-10">
                 <h2>You are not logged in!</h2>
