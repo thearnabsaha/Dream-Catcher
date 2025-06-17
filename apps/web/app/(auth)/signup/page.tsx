@@ -27,7 +27,7 @@ const Signup = () => {
   })
 
   function onSubmit(values: z.infer<typeof SignUpSchema>) {
-    console.log(values)
+    // console.log(values)
     Signupform.reset()
   }
   return (

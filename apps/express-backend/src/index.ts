@@ -11,7 +11,7 @@ import { SignInSchema, SignUpSchema } from '@workspace/common/types';
 import { JWT_SECRET } from '@workspace/backend-common/config'
 import { prisma } from '@workspace/db/client';
 const morganFormat = ':method :url :status :response-time ms';
-
+import userRoutes from './routes/user.route'
 app.use(morgan(morganFormat));
 app.use(helmet());
 
@@ -42,15 +42,17 @@ app.get('/health', async (req, res) => {
   };
   res.status(200).json(healthcheck);
 });
-app.post('/signup', async (req, res) => {
-  const result = SignUpSchema.safeParse(req.body);
-  if (!result.success) {
-    res.send(result.error.format());
-  } else {
-    const user=await prisma.user.createMany({
-      data:req.body
-    });
-    res.send(result);
-  }
-});
+
+app.use('/',userRoutes);
+// app.post('/signup', async (req, res) => {
+//   const result = SignUpSchema.safeParse(req.body);
+//   if (!result.success) {
+//     res.send(result.error.format());
+//   } else {
+//     const user=await prisma.user.createMany({
+//       data:req.body
+//     });
+//     res.send(result);
+//   }
+// });
 app.listen(port, () => console.log('> Server is up and running on port: ' + port));
