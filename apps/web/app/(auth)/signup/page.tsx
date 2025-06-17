@@ -14,6 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import Link from "next/link"
 import { SignUpSchema } from "@workspace/common/types"
+import axios from 'axios'
 const Signup = () => {
   const Signupform = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
@@ -28,6 +29,19 @@ const Signup = () => {
 
   function onSubmit(values: z.infer<typeof SignUpSchema>) {
     // console.log(values)
+    axios.post("http://localhost:3001/signup",{
+      email:values.email,
+      firstname:values.firstname,
+      lastname:values.lastname,
+      username:values.username,
+      password:values.password
+    })
+    .then((e)=>{
+      console.log(e)
+    })
+    .catch((e)=>{
+      console.log(e)
+    })
     Signupform.reset()
   }
   return (

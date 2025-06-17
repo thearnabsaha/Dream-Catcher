@@ -15,10 +15,11 @@ import userRoutes from './routes/user.route'
 app.use(morgan(morganFormat));
 app.use(helmet());
 
-app.use(cors({
-  origin: process.env.CORS_ORIGIN,
-  credentials: true,
-}));
+app.use(cors());
+// app.use(cors({
+//   origin: process.env.CORS_ORIGIN,
+//   credentials: true,
+// }));
 
 // app.options('*', cors({
 //   origin: process.env.CORS_ORIGIN,
@@ -44,15 +45,4 @@ app.get('/health', async (req, res) => {
 });
 
 app.use('/',userRoutes);
-// app.post('/signup', async (req, res) => {
-//   const result = SignUpSchema.safeParse(req.body);
-//   if (!result.success) {
-//     res.send(result.error.format());
-//   } else {
-//     const user=await prisma.user.createMany({
-//       data:req.body
-//     });
-//     res.send(result);
-//   }
-// });
 app.listen(port, () => console.log('> Server is up and running on port: ' + port));

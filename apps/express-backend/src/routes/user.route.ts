@@ -1,11 +1,10 @@
 import { Router } from "express";
-import { UserSignUp } from "../controllers/user.controller";
-// import { getUser } from "../controllers/user.controller";
-// import { jwtAuth } from "../middlewares/jwtAuth";
+import { UserSignIn, UserSignUp } from "../controllers/user.controller";
 
 const router = Router();
 
 router.post("/signup", UserSignUp);
+router.post("/signin", UserSignIn);
 // router.get("/signup", jwtAuth, getUser);
 
 export default router;
