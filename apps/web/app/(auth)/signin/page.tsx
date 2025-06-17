@@ -13,6 +13,7 @@ import { Input } from "@workspace/ui/components/input"
 import { Button } from "@workspace/ui/components/button"
 import { SignInSchema } from "@workspace/common/types"
 import Link from "next/link"
+import { FaGithub, FaGoogle } from "react-icons/fa"
 const page = () => {
   const SignInform = useForm<z.infer<typeof SignInSchema>>({
     resolver: zodResolver(SignInSchema),
@@ -59,7 +60,11 @@ const page = () => {
           <Button type="submit" className="w-full">Submit</Button>
         </form>
       </Form>
-      {/* <h1 className="flex justify-center items-center mt-2 text-muted-foreground"><span className="w-30 h-0.5 bg-muted-foreground block mr-2"></span>Or Register With <span className="w-30 h-0.5 bg-muted-foreground block ml-2"></span></h1> */}
+      <h1 className="flex justify-center items-center mt-2 text-muted-foreground"><span className="w-30 h-0.5 bg-muted-foreground block mr-2"></span>Or Register With <span className="w-30 h-0.5 bg-muted-foreground block ml-2"></span></h1>
+      <div className="mt-3 flex justify-center">
+        <Button variant="secondary" className=" px-10 py-5 mr-2.5"><FaGoogle />Log in With Google</Button>
+        <Button variant="secondary" className=" px-10 py-5 ml-2.5"><FaGithub />Log in With Github</Button>
+      </div>
     </div>
   )
 }
