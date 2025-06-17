@@ -1,9 +1,18 @@
-export default function Page() {
-  return (
-    <div className="flex items-center justify-center min-h-svh">
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h1>Landing Page</h1>
-      </div>
-    </div>
-  )
+'use client';
+
+import { signIn, signOut, useSession } from "next-auth/react";
+
+export default function AuthButton() {
+  const { data: session } = useSession();
+  if (session) {
+    console.log(session)
+    return (
+      <>
+        <p>Welcome, {session.user?.name}</p>
+        <button onClick={() => signOut()}>Sign out</button>
+      </>
+    );
+  }
+
+  return <button onClick={() => signIn("google")}>Sign in with Google</button>;
 }

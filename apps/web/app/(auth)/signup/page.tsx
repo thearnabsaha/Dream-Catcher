@@ -18,6 +18,8 @@ import axios from 'axios'
 import { BACKEND_URL } from "@/lib/config"
 import { FaGithub } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
+import { signIn, signOut, useSession } from "next-auth/react";
+
 const Signup = () => {
   const Signupform = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
@@ -121,8 +123,8 @@ const Signup = () => {
       </Form>
       <h1 className="flex justify-center items-center mt-2 text-muted-foreground"><span className="w-30 h-0.5 bg-muted-foreground block mr-2"></span>Or Register With <span className="w-30 h-0.5 bg-muted-foreground block ml-2"></span></h1>
       <div className="mt-3 flex justify-center">
-        <Button variant="secondary" className=" px-10 py-5 mr-2.5"><FaGoogle />Log in With Google</Button>
-        <Button variant="secondary" className=" px-10 py-5 ml-2.5"><FaGithub />Log in With Github</Button>
+        <Button variant="secondary" className=" px-10 py-5 mr-2.5" onClick={() => signIn("google")}><FaGoogle />Log in With Google</Button>
+        <Button variant="secondary" className=" px-10 py-5 ml-2.5" onClick={() => signIn("github")}><FaGithub />Log in With Github</Button>
       </div>
     </div>
   )
