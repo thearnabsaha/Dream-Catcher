@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form"
 import Link from "next/link"
 import { SignUpSchema } from "@workspace/common/types"
 import axios from 'axios'
+import { BACKEND_URL } from "@/lib/config"
 const Signup = () => {
   const Signupform = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
@@ -29,7 +30,7 @@ const Signup = () => {
 
   function onSubmit(values: z.infer<typeof SignUpSchema>) {
     // console.log(values)
-    axios.post("http://localhost:3001/signup",{
+    axios.post(`${BACKEND_URL}/signup`,{
       email:values.email,
       firstname:values.firstname,
       lastname:values.lastname,
